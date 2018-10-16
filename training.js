@@ -18,7 +18,7 @@ var body = document.body;
      makeStyle(inputField, inputFieldP);
      body.appendChild(inputField);
 
-
+ var counterTables = 0;
 // Input transference data
 //new event
 inputField.addEventListener('change', dataSearch);
@@ -65,7 +65,7 @@ function createRequest(question){
         var reqUrl = clientUrl + "?key=" + key + "&cx=" + engineId + "&q=" + question;
        var result = httpGet(reqUrl);
        var some = JSON.parse(result);
-       
+       console.log(some);
        var items = some.items;
        var itemLinks = [];
        var itemTitle = [];
@@ -107,26 +107,33 @@ return obj;
 
 var table = document.createElement("table");
 makeStyle(table, tableP);
-table.id = 'tableId';
+table.id = 'tableId' + counterTables;
 body.appendChild(table);
-    
+    counterTables++;
+
     for(var j = 0; j < arr[0].length; j++){
     var row = document.createElement('tr');
 
     var cell = document.createElement('td');
-    cell.appendChild(document.createTextNode(j));
+    cell.appendChild(document.createTextNode(j + 1));
     makeStyle(cell, cellP);
     row.appendChild(cell);
 
         var cell1 = document.createElement('td');
         cell1.appendChild(document.createTextNode(arr[1][j]));
         makeStyle(cell1, cell12P);
+        cell1.id = j+'id' + counterTables;
+        // cell1.addEventListener('mouseenter', function (){
+        //     var div2 = document.createElement('div');
+        //     makeStyle(div2, div2P);
+        //     cell1.appendChild(div2);
+        // })
     row.appendChild(cell1);
 
         var cell2 = document.createElement('td');
             var link = document.createElement('a');
             link.href = arr[0][j];
-            link.appendChild(document.createTextNode(arr[0][j].substring(0,150)));
+            link.appendChild(document.createTextNode(arr[0][j].substring(0,100)));
             makeStyle(link, linkP);
         cell2.appendChild(link);
         makeStyle(cell2, cell12P);
@@ -135,8 +142,9 @@ body.appendChild(table);
     makeStyle(row, rowP);
 table.appendChild(row);
     }
-    table.lastChild.style.border = 'none';
     
+    table.lastChild.style.border = 'none';
+    console.log(counterTables);
  }
 
  //Styles

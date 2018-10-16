@@ -4,7 +4,8 @@ var bodyP = {
     backgroundImage: 'url(gifStar.gif)',
     backgroundPositionX: 'center',
     backgroundSize: 'cover',
-    color: 'white'
+    color: 'white',
+    fontWeight: '600'
 }
 var tableP = {
     marginBottom: '10px',
@@ -74,4 +75,10 @@ var h1StartP = {
     width:'200px',
     textAlign:'center',
     marginTop: '255px',
+}
+
+var div2P = {
+   width: '10px',
+   height: '10px',
+   backgroundColor: 'blue'
 }

@@ -77,8 +77,11 @@ var h1StartP = {
     marginTop: '255px',
 }
 
-var div2P = {
-   width: '10px',
-   height: '10px',
-   backgroundColor: 'blue'
+var imgP = {
+   width: '120px',
+   height: '120px',
+   position: 'absolute',
+   marginTop: '1%',
+   marginLeft: '5%',
+   opacity: '0.8'
 }

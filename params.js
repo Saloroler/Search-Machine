@@ -22,7 +22,8 @@ var cellP = {
     padding: '10px'
 }
 var cell12P = {
-    padding: '10px'
+    padding: '10px',
+    width: '45%'
 }
 var rowP = {
     borderBottom: '1px solid white'
@@ -35,7 +36,18 @@ var linkP = {
 }
 
 
-                    ////////////////////////////////Header////////////////////////////
+var imgP = {
+    width: '120px',
+    height: '120px',
+    position: 'absolute',
+    marginTop: '1%',
+    marginLeft: '5%',
+    opacity: '0.8'
+ }
+
+
+
+                    ////////////////////////////////Header//////////////////////////////
 
 var buttonDP = {
     display: 'block',
@@ -74,14 +86,7 @@ var h1StartP = {
     marginRight:'auto',
     width:'200px',
     textAlign:'center',
-    marginTop: '255px',
+    marginTop: '25%',
 }
 
-var imgP = {
-   width: '120px',
-   height: '120px',
-   position: 'absolute',
-   marginTop: '1%',
-   marginLeft: '5%',
-   opacity: '0.8'
-}
+

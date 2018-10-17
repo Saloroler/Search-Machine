@@ -41,15 +41,16 @@ function dataSearch(){
      buttonD.appendChild(document.createTextNode('Delete'))
      makeStyle(buttonD, buttonDP);
      div1.appendChild(buttonD);
-
+    
      buttonD.addEventListener("click", function(){
          var tableNumid = this.id.substring(5);
-         console.log(tableNumid);
+         
         body.removeChild(document.getElementById('tableId' + tableNumid));
         div1.removeChild(buttonD);
         div1.removeChild(h3);
-        if(document.getElementById('tableId') == null){
-            h1.style.marginTop = '255px';
+        if(document.getElementsByClassName('tablesChange').length  == 0){
+            h1.style.marginTop = '25%';
+            
         }
      })
 
@@ -64,13 +65,13 @@ function dataSearch(){
 function createRequest(question){
     if(question) {
         //AIzaSyDcb7RF6xm_Wma4MFRfdPZ7GuNYy7ha0qI
-        var key = "AIzaSyBzCblMfQ0Ln4g_uN6fQa-em6RisDvFBZE",
+        var key = "AIzaSyDcb7RF6xm_Wma4MFRfdPZ7GuNYy7ha0qI",
             engineId = "011851895572920026093:og7uyxntu5g",
                 clientUrl = "https://www.googleapis.com/customsearch/v1";
         var reqUrl = clientUrl + "?key=" + key + "&cx=" + engineId + "&q=" + question;
        var result = httpGet(reqUrl);
        var some = JSON.parse(result);
-       console.log(some);
+       
        var items = some.items;
        var itemLinks = [];
        var itemTitle = [];
@@ -117,11 +118,10 @@ return obj;
  function makeFront(arr, imgArr){
 //Before generation table change style input(to top)
   h1.style.marginTop = '0';
-//
-console.log(imgArr);
 
 var table = document.createElement("table");
 makeStyle(table, tableP);
+table.className = "tablesChange";
 table.id = 'tableId' + counterTables;
 body.appendChild(table);
     counterTables++;
@@ -145,15 +145,36 @@ body.appendChild(table);
         var cell2 = document.createElement('td');
             var link = document.createElement('a');
             link.href = arr[0][j];
-            link.appendChild(document.createTextNode(arr[0][j].substring(0,100)));
+            link.appendChild(document.createTextNode(arr[0][j].substring(0,70)));
             makeStyle(link, linkP);
         cell2.appendChild(link);
         makeStyle(cell2, cell12P);
     row.appendChild(cell2);
+//Icon like
+        var cell3 = document.createElement('td');
+        var iIcon = document.createElement('i');
+        iIcon.id = j + 'idIcon' + counterTables;
+        iIcon.className = 'fas fa-heart notChosen'
+        iIcon.style.opacity = '0.5';
+        cell3.appendChild(iIcon);
+        cell3.style.padding = '10px';
+        row.appendChild(cell3);
+//Icon remove
+        var cell4 = document.createElement('td');
+        var iIconD = document.createElement('i');
+        iIconD.id = j + 'idIconD' + counterTables;
+        iIconD.className = 'fas fa-trash-alt';
+        iIconD.style.opacity = '0.5';
+        cell4.appendChild(iIconD);
+        cell4.style.padding = '10px';
+        row.appendChild(cell4);
 
     makeStyle(row, rowP);
 table.appendChild(row);
-document.getElementById(`${j}id${counterTables}`).addEventListener('mouseenter', function(){
+
+    //Events on table
+
+cell1.addEventListener('mouseenter', function(){
     var countRow = this.id.substring(0,1);     
     var countRow4 = this.id.substring(3);
     var div2 = document.createElement('div');
@@ -167,8 +188,7 @@ document.getElementById(`${j}id${counterTables}`).addEventListener('mouseenter',
     this.appendChild(div2);
    
 })
-
-document.getElementById(`${j}id${counterTables}`).addEventListener('mouseleave', function (){
+cell1.addEventListener('mouseleave', function (){
     
     var countRow2 = this.id.substring(0,1);
     var countRow3 = this.id.substring(3)
@@ -178,6 +198,48 @@ document.getElementById(`${j}id${counterTables}`).addEventListener('mouseleave',
     cellOur.removeChild(div2Link);
     
 })
+var styleClick = true;
+
+iIcon.onmouseenter = function (){  
+    this.id += '1';
+    if(this.id.length == '9'){
+        this.style.opacity = '1';
+    }
+}
+    iIcon.onmouseleave = function () {
+        this.id = this.id.substring(0, this.id.length - 1);
+        if(this.id.length == '8'){
+            this.style.opacity = '0.5';
+        }
+    } 
+    iIcon.onclick = function(){
+        this.id += '1';
+        if(this.id.length > '9'){
+            this.style.opacity = '1';
+            this.id = this.id.substring(0, 8);
+        }
+    }
+//Events IconDelete
+    iIconD.onmouseenter = function(){
+        this.id += '1';
+        if(this.id.length == '10'){
+            this.style.opacity = '1';
+        }
+    }
+    iIconD.onmouseleave = function(){
+        this.id = this.id.substring(0, this.id.length - 1);
+        if(this.id.length == '9'){
+            this.style.opacity = '0.5';
+        }
+    }
+    iIconD.onclick = function (){
+        this.id += '1';
+        var currentRow = this.parentNode.parentNode;
+        currentRow.parentNode.removeChild(currentRow);
+        
+    }
+
+//for end |
     }
     
     table.lastChild.style.border = 'none';
